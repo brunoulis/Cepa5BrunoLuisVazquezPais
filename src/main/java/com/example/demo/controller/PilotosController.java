@@ -59,8 +59,9 @@ public class PilotosController {
             // Guardamos el piloto (Generara ID)
             pilotosService.savePilotos(newPilotoDTO);
 
-            PilotosDTO elpilotoUPD = pilotosService.getPilotosById(idEquipo);
-            return new ResponseEntity<>(elpilotoUPD, HttpStatus.OK);
+            // Recargamos el equipo modificado y retornamos
+            equipoDTO = equiposService.getEquiposById(idEquipo);
+            return new ResponseEntity<>(equipoDTO, HttpStatus.OK);
         }
     }
 

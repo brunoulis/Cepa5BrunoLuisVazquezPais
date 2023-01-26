@@ -34,11 +34,12 @@ import ch.qos.logback.core.Context;
 
 import com.example.demo.service.EquiposService;
 
+@RestController
 public class EquiposController {
     private static final Logger log = LoggerFactory.getLogger(Cepa5BrunoLuisVazquezPaisApplication.class);
 
     @Autowired
-    private jakarta.servlet.http.HttpServletRequest context;
+    private HttpServletRequest context;
 
     @Autowired
     private PilotosService pilotosService;
@@ -51,7 +52,7 @@ public class EquiposController {
 
     @GetMapping("/equipos")
     public ResponseEntity<List<EquiposDTO>> getAllEquipos() {
-        log.info(context.getMethod() + "from" + context.getRequestHost());
+        log.info(context.getMethod() + "from" + context.getRemoteHost());
         List<EquiposDTO> listaEquipos = equiposService.listAllEquipos();
         if (listaEquipos.isEmpty() || listaEquipos == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -62,9 +63,9 @@ public class EquiposController {
     }
 
     @GetMapping("/equipos/{idEquipo}")
-    public ResponseEntity<EquiposDTO> getEquipoById(@PathVariable("idEquipo") int idEquipo) {
-        log.info(context.getMethod() + "from" + context.getRequestHost());
-        EquiposDTO equipo = equiposService.getEquipoById(idEquipo);
+    public ResponseEntity<EquiposDTO> getEquipoById(@PathVariable("idEquipo") Long idEquipo) {
+        log.info(context.getMethod() + "from" + context.getRequestURI());
+        EquiposDTO equipo = equiposService.getEquiposById(idEquipo);
         if (equipo == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -74,7 +75,7 @@ public class EquiposController {
 
     @PostMapping("/equipos")
     public ResponseEntity<EquiposDTO> createEquipo(@RequestBody EquiposDTO newequipo) {
-        log.info(context.getMethod() + "from" + context.getRequestHost());
+        log.info(context.getMethod() + context.getRequestURI());
         EquiposDTO equipoCreado = equiposService.saveEquipos(newequipo);
         if (equipoCreado == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -85,13 +86,13 @@ public class EquiposController {
 
     @PutMapping("/equipos")
     public ResponseEntity<EquiposDTO> updateEquipo(@RequestBody EquiposDTO updequipo) {
-        log.info(context.getMethod() + "from" + context.getRequestHost());
+        log.info(context.getMethod() + context.getRequestURI());
         EquiposDTO equipoActualizado = equiposService.getEquiposById(updequipo.getIdEquipo());
         if (equipoActualizado == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             EquiposDTO elEquipoUPD = equiposService.saveEquipos(updequipo);
-            return new ResponseEntity<>(equipoActualizado, HttpStatus.OK);
+            return new ResponseEntity<>(elEquipoUPD, HttpStatus.OK);
         }
     }
 
