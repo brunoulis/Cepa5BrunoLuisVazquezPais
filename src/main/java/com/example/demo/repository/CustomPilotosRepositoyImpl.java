@@ -15,15 +15,23 @@ public class CustomPilotosRepositoyImpl implements CustomPilotosRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     @Autowired
     private EquiposRepository equipoRepository;
-    
-    
+
     @Override
     public void saveCustomPilotos(PilotosDTO pilotosdto) {
-        Optional<Equipos> equipo= equipoRepository.findById(pilotosdto.getEquipo().getIdEquipo());
+        Optional<Equipos> equipo = equipoRepository.findById(pilotosdto.getEquipo().getIdEquipo());
+        // Mapeamos el dto a una entidad
+        Pilotos piloto = PilotosDTO.convertToEntity(pilotosdto);
+        piloto.setEquipos(equipo.get());
         
+        // Added
+        equipo.get().getListaPilotos().add(piloto);
+        
+        //Mandamos persistir el objeto
+        entityManager.persist(equipo);
+
     }
 
 }

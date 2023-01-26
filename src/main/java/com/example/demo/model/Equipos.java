@@ -21,7 +21,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author luisv
@@ -34,7 +33,6 @@ public class Equipos implements Serializable {
 	private String nombre;
 	private String pais;
 	private Set<Pilotos> listapilotos = new HashSet<Pilotos>(0);
-	
 
 	public Equipos() {
 	}
@@ -45,18 +43,17 @@ public class Equipos implements Serializable {
 		this.pais = pais;
 	}
 
-	public Equipos(Long idEquipo, String nombre, String pais, Pilotos pilotoses) 
-			 {
+	public Equipos(Long idEquipo, String nombre, String pais, Pilotos pilotoses) {
 		this.idEquipo = idEquipo;
 		this.nombre = nombre;
 		this.pais = pais;
 		this.listapilotos = (Set<Pilotos>) pilotoses;
-		
+
 	}
 
 	@Id
 
-	@Column(name = "id_equipo", unique = true, nullable = false)
+	@Column(name = "idequipo", unique = true, nullable = false)
 	public Long getIdEquipo() {
 		return this.idEquipo;
 	}
@@ -83,7 +80,6 @@ public class Equipos implements Serializable {
 		this.pais = pais;
 	}
 
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipos")
 	public Set<Pilotos> getListaPilotos() {
 		return this.listapilotos;
@@ -92,7 +88,5 @@ public class Equipos implements Serializable {
 	public void setPilotoses(Set<Pilotos> pilotoses) {
 		this.listapilotos = pilotoses;
 	}
-
-	
 
 }

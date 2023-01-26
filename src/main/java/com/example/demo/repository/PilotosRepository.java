@@ -13,7 +13,7 @@ import com.example.demo.model.Pilotos;
 @Transactional
 public interface PilotosRepository extends JpaRepository<Pilotos, Long>, CustomPilotosRepository {
 
-    @Query(value = "select p from Pilotos p where p.equipos.id = :idequipo")
+    @Query(value = "select p from pilotos p where p.id_equipo=:idequipo")
     public Pilotos getPilotosByEquipo(@Param("idequipo") Long idEquipo);
 
 }

@@ -21,11 +21,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Data;
+import lombok.ToString;
+
 
 /**
  *
  * @author luisv
  */
+@Data
 @Entity
 @Table(name = "Pilotos", catalog = "f1")
 public class Pilotos implements Serializable {
