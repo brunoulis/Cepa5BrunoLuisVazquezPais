@@ -24,14 +24,13 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-
 /**
  *
  * @author luisv
  */
 @Data
 @Entity
-@Table(name = "Pilotos", catalog = "f1")
+@Table(name = "Pilotos", catalog = "f1equipoypilotos")
 public class Pilotos implements Serializable {
 
 	private Long idPiloto;
@@ -39,7 +38,6 @@ public class Pilotos implements Serializable {
 	private String nombre;
 	private String apellido;
 	private int edad;
-	
 
 	public Pilotos() {
 	}
@@ -51,8 +49,6 @@ public class Pilotos implements Serializable {
 		this.apellido = apellido;
 		this.edad = edad;
 	}
-
-	
 
 	@Id
 	@Column(name = "id_piloto", unique = true, nullable = false)
@@ -100,7 +96,5 @@ public class Pilotos implements Serializable {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-     
-        
 
 }

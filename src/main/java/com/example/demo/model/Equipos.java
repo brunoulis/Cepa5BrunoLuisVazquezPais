@@ -26,7 +26,7 @@ import javax.persistence.Table;
  * @author luisv
  */
 @Entity
-@Table(name = "Equipos", catalog = "f1")
+@Table(name = "Equipos", catalog = "f1equipoypilotos")
 public class Equipos implements Serializable {
 
 	private Long idEquipo;
