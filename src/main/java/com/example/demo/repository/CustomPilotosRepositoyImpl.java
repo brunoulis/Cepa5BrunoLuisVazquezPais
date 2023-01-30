@@ -24,12 +24,12 @@ public class CustomPilotosRepositoyImpl implements CustomPilotosRepository {
         Optional<Equipos> equipo = equipoRepository.findById(pilotosdto.getEquipo().getIdEquipo());
         // Mapeamos el dto a una entidad
         Pilotos piloto = PilotosDTO.convertToEntity(pilotosdto);
-        piloto.setEquipos(equipo.get());
-        
+        piloto.setEquipo(equipo.get());
+
         // Added
         equipo.get().getListapilotos().add(piloto);
-        
-        //Mandamos persistir el objeto
+
+        // Mandamos persistir el objeto
         entityManager.persist(equipo);
 
     }

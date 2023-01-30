@@ -34,7 +34,7 @@ public class PilotosDTO implements Serializable {
         pilotoDTO.setApellido(piloto.getApellido());
         pilotoDTO.setEdad(piloto.getEdad());
         pilotoDTO.setEquipo(equipo);
-        
+
         return pilotoDTO;
     }
 
@@ -46,7 +46,7 @@ public class PilotosDTO implements Serializable {
         piloto.setApellido(pilotoDTO.getApellido());
         piloto.setEdad(pilotoDTO.getEdad());
         Equipos equipo = EquiposDTO.convertToEntity(pilotoDTO.getEquipo());
-        piloto.setEquipos(equipo);
+        piloto.setEquipo(equipo);
 
         return piloto;
     }
@@ -56,8 +56,5 @@ public class PilotosDTO implements Serializable {
         super();
         this.equipo = new EquiposDTO();
     }
-
-    
-    
 
 }

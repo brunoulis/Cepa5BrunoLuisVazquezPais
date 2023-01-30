@@ -5,7 +5,8 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,72 +22,48 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.ToString;
+
 /**
  *
  * @author luisv
  */
+
+/*
+ * CREATE TABLE Equipos(
+ * id_equipo INT NOT NULL AUTO_INCREMENT,
+ * nombre VARCHAR(50) NOT NULL,
+ * pais VARCHAR(50) NOT NULL,
+ * PRIMARY KEY(id_equipo)
+ * );
+ * 
+ * CREATE TABLE Pilotos(
+ * id_piloto INT NOT NULL AUTO_INCREMENT,
+ * nombre VARCHAR(50) NOT NULL,
+ * apellido VARCHAR(50) NOT NULL,
+ * edad INT NOT NULL,
+ * id_equipo INT NOT NULL,
+ * foreign key (id_equipo) references Equipos(id_equipo),
+ * PRIMARY KEY(id_piloto)
+ * );
+ */
+
+@Data
 @Entity
-@Table(name = "Equipos", catalog = "f1equipoypilotos")
+@Table(name = "Equipos")
 public class Equipos implements Serializable {
 
-	private Long idEquipo;
-	private String nombre;
-	private String pais;
-	private Set<Pilotos> listapilotos = new HashSet<Pilotos>(0);
-
-	public Equipos() {
-	}
-
-	public Equipos(Long idEquipo, String nombre, String pais) {
-		this.idEquipo = idEquipo;
-		this.nombre = nombre;
-		this.pais = pais;
-	}
-
-	public Equipos(Long idEquipo, String nombre, String pais, Pilotos pilotoses) {
-		this.idEquipo = idEquipo;
-		this.nombre = nombre;
-		this.pais = pais;
-		this.listapilotos = (Set<Pilotos>) pilotoses;
-
-	}
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idEquipo;
+	@Column(name = "nombre")
+	private String nombre;
+	@Column(name = "pais")
+	private String pais;
 
-	@Column(name = "idequipo", unique = true, nullable = false)
-	public Long getIdEquipo() {
-		return this.idEquipo;
-	}
-
-	public void setIdEquipo(Long idEquipo) {
-		this.idEquipo = idEquipo;
-	}
-
-	@Column(name = "nombre", nullable = false, length = 50)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	@Column(name = "pais", nullable = false, length = 50)
-	public String getPais() {
-		return this.pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipos")
-	public Set<Pilotos> getListapilotos() {
-		return this.listapilotos;
-	}
-
-	public void setListapilotos(Set<Pilotos> pilotoses) {
-		this.listapilotos = pilotoses;
-	}
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipos")
+	@ToString.Exclude
+	private List<Pilotos> listapilotos = new ArrayList<>();
 
 }

@@ -5,13 +5,13 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +20,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -28,73 +30,47 @@ import lombok.ToString;
  *
  * @author luisv
  */
+
+/*
+ * CREATE TABLE Equipos(
+ * id_equipo INT NOT NULL AUTO_INCREMENT,
+ * nombre VARCHAR(50) NOT NULL,
+ * pais VARCHAR(50) NOT NULL,
+ * PRIMARY KEY(id_equipo)
+ * );
+ * 
+ * CREATE TABLE Pilotos(
+ * id_piloto INT NOT NULL AUTO_INCREMENT,
+ * nombre VARCHAR(50) NOT NULL,
+ * apellido VARCHAR(50) NOT NULL,
+ * edad INT NOT NULL,
+ * id_equipo INT NOT NULL,
+ * foreign key (id_equipo) references Equipos(id_equipo),
+ * PRIMARY KEY(id_piloto)
+ * );
+ */
+
 @Data
 @Entity
-@Table(name = "Pilotos", catalog = "f1equipoypilotos")
-public class Pilotos implements Serializable {
-
-	private Long idPiloto;
-	private Equipos equipos;
-	private String nombre;
-	private String apellido;
-	private int edad;
-
-	public Pilotos() {
-	}
-
-	public Pilotos(Long idPiloto, Equipos equipos, String nombre, String apellido, int edad) {
-		this.idPiloto = idPiloto;
-		this.equipos = equipos;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-	}
+@Table(name = "Pilotos")
+public class Pilotos {
 
 	@Id
-	@Column(name = "id_piloto", unique = true, nullable = false)
-	public Long getIdPiloto() {
-		return this.idPiloto;
-	}
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idPiloto;
 
-	public void setIdPiloto(Long idPiloto) {
-		this.idPiloto = idPiloto;
-	}
+	@Column(name = "nombre")
+	private String nombre;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_equipo", nullable = false)
-	public Equipos getEquipos() {
-		return this.equipos;
-	}
+	@Column(name = "apellido")
+	private String apellido;
 
-	public void setEquipos(Equipos equipos) {
-		this.equipos = equipos;
-	}
+	@Column(name = "edad")
+	private int edad;
 
-	@Column(name = "nombre", nullable = false, length = 50)
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	@Column(name = "apellido", nullable = false, length = 50)
-	public String getApellido() {
-		return this.apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	@Column(name = "edad", nullable = false)
-	public int getEdad() {
-		return this.edad;
-	}
-
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
+	@ManyToOne
+	@JoinColumn(name = "id_equipo")
+	@ToString.Exclude
+	private Equipos equipo;
 
 }

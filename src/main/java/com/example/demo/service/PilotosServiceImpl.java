@@ -46,6 +46,4 @@ public class PilotosServiceImpl implements PilotosService {
         pilotosRepository.deleteById(id);
     }
 
-   
-
 }
