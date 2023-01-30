@@ -22,7 +22,7 @@ public class PilotosServiceImpl implements PilotosService {
 
     @Override
     public void savePilotos(PilotosDTO pilotosdto) {
-        pilotosRepository.save(PilotosDTO.convertToEntity(pilotosdto));
+        pilotosRepository.saveCustomCuenta(PilotosDTO);
     }
 
     @Override
