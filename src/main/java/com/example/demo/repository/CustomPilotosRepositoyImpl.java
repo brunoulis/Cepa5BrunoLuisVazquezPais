@@ -27,7 +27,7 @@ public class CustomPilotosRepositoyImpl implements CustomPilotosRepository {
         piloto.setEquipos(equipo.get());
         
         // Added
-        equipo.get().getListaPilotos().add(piloto);
+        equipo.get().getListapilotos().add(piloto);
         
         //Mandamos persistir el objeto
         entityManager.persist(equipo);

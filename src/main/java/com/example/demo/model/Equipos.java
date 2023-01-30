@@ -81,11 +81,11 @@ public class Equipos implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "equipos")
-	public Set<Pilotos> getListaPilotos() {
+	public Set<Pilotos> getListapilotos() {
 		return this.listapilotos;
 	}
 
-	public void setPilotoses(Set<Pilotos> pilotoses) {
+	public void setListapilotos(Set<Pilotos> pilotoses) {
 		this.listapilotos = pilotoses;
 	}
 

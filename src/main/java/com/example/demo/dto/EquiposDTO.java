@@ -41,7 +41,7 @@ public class EquiposDTO implements Serializable {
          * equipoDTO.getListaPilotos().add(pilotosdto);
          * }
          */
-        for (Pilotos lospilotos : equipo.getListaPilotos()) {
+        for (Pilotos lospilotos : equipo.getListapilotos()) {
             PilotosDTO pilotosdto = PilotosDTO.convertToDTO(lospilotos, equipoDTO);
             equipoDTO.getListaPilotos().add(pilotosdto);
         }
@@ -61,7 +61,7 @@ public class EquiposDTO implements Serializable {
         // Cargamos la lista de pilotos
         for (int i = 0; i < equipoDTO.getListaPilotos().size(); i++) {
             Pilotos pilotos = PilotosDTO.convertToEntity(equipoDTO.getListaPilotos().get(i));
-            equipo.getListaPilotos().add(pilotos);
+            equipo.getListapilotos().add(pilotos);
         }
 
         return equipo;

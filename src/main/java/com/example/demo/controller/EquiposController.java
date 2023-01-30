@@ -41,8 +41,8 @@ public class EquiposController {
     @Autowired
     private HttpServletRequest context;
 
-    @Autowired
-    private PilotosService pilotosService;
+  //  @Autowired
+  //  private PilotosService pilotosService;
 
     @Autowired
     private EquiposService equiposService;
