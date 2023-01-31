@@ -31,7 +31,6 @@ public class EquiposDTO implements Serializable {
         equipoDTO.setIdEquipo(equipo.getIdEquipo());
         equipoDTO.setNombre(equipo.getNombre());
         equipoDTO.setPais(equipo.getPais());
-        
 
         /*
          * Cargamos la lista de pilotos. Versión original. Error con NULL
@@ -72,7 +71,5 @@ public class EquiposDTO implements Serializable {
         super();
         this.listaPilotos = new ArrayList<PilotosDTO>();
     }
-    
-    
 
 }

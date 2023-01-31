@@ -39,13 +39,13 @@ import lombok.ToString;
  * PRIMARY KEY(id_equipo)
  * );
  * 
- * CREATE TABLE Pilotos(
+ * CREATE TABLE pilotos(
  * id_piloto INT NOT NULL AUTO_INCREMENT,
  * nombre VARCHAR(50) NOT NULL,
  * apellido VARCHAR(50) NOT NULL,
- * edad INT NOT NULL,
  * id_equipo INT NOT NULL,
- * foreign key (id_equipo) references Equipos(id_equipo),
+ * edad int NOT NULL,
+ * foreign key(id_equipo) references equipos(idequipo),
  * PRIMARY KEY(id_piloto)
  * );
  */
